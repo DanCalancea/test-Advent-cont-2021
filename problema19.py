@@ -17,41 +17,25 @@ def zero(i):
 def caut12(sc1, sc2):
     s1, s2 = scanner[sc1], scanner[sc2]
 
-    for x2, y2, z2 in variante:
+    for x2, y2, z2 in variante_permutari:
 
-        for ox2, oy2, oz2 in operatori:
-            dx, dy, dz = [], [], []
+        for ox2, oy2, oz2 in variante_semne:
+            dxyz = []
             difx, dify, difz = 0, 0, 0
-            flagx, flagy, flagz = False, False, False
+            flagxyz = False
 
-            for i in s1:
+            for i in s1:         # detectie exacta dar consumatoare de resurse
                 for j in s2:
-                    dx.append(i[0] - j[x2] * ox2)
-                    dy.append(i[1] - j[y2] * oy2)
-                    dz.append(i[2] - j[z2] * oz2)
+                    dxyz.append([i[0] - j[x2] * ox2, i[1] - j[y2] * oy2,i[2] - j[z2] * oz2])
 
-            for a in dx:
-                if dx.count(a) >= 12:
-                    difx = a
-                    flagx = True
-                    break
-            if not flagx: continue
-
-            for a in dy:
-                if dy.count(a) >= 12:
-                    dify = a
-                    flagy = True
-                    break
-            if not flagy: continue
-
-            for a in dz:
-                if dz.count(a) >= 12:
-                    difz = a
-                    flagz = True
+            for a in dxyz:
+                if dxyz.count(a) >= 12:
+                    difxyz = a
+                    flagxyz = True
                     break
 
-            if flagx and flagy and flagz:
-                locatiescanner[sc2] = [difx, dify, difz, ox2, oy2, oz2, x2, y2, z2]
+            if flagxyz:
+                locatiescanner[sc2] = [difxyz[0], difxyz[1], difxyz[2], ox2, oy2, oz2, x2, y2, z2]
 
                 return True
 
@@ -63,9 +47,9 @@ locatiescanner = []
 nrscan = -1
 rezultate = []
 
-operatori = [[1, 1, 1], [-1, 1, -1], [-1, -1, 1], [1, -1, -1], [-1, 1, 1], [1, -1, 1], [1, 1, -1], [-1, -1, -1]]
+variante_semne = [[1, 1, 1], [-1, 1, -1], [-1, -1, 1], [1, -1, -1], [-1, 1, 1], [1, -1, 1], [1, 1, -1], [-1, -1, -1]]
 
-variante = [[0, 1, 2], [1, 2, 0], [2, 0, 1], [1, 0, 2], [0, 2, 1], [2, 1, 0]]
+variante_permutari= [[0, 1, 2], [1, 2, 0], [2, 0, 1], [1, 0, 2], [0, 2, 1], [2, 1, 0]]
 
 if len(sys.argv) > 1:
     fil = open(sys.argv[1])
@@ -93,18 +77,22 @@ locatiescanner[0] = [0, 0, 0, 1, 1, 1, 0, 1, 2]
 sonde = []
 gasite = [0]
 
-#
+
+
+
+
 while len(gasite) < len(scanner):
+
     for i in range(1, len(scanner)):
         if i not in gasite:
-            for j in range(len(scanner)):
-                if len(locatiescanner[j]) > 1:
-                    if caut12(j, i):
-                        gasite.append(i)
-                        print(i)
-                        zero(i)
+            una=reversed(gasite)    # modificare in spiritul celor spuse de tine , a scazut timpul
+            for j in list(una):
+                if caut12(j, i):
+                    gasite.append(i)
 
-                        break
+                    print(i)
+                    zero(i)
+                    break
 
 rezultate = []
 for i in scanner:
