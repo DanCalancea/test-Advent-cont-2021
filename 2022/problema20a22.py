@@ -10,8 +10,8 @@ def roata(xx):
         return
     intrari.pop(x)
     nextp = (x + a + lung - 1) % (lung - 1)
-    # if nextp == 6: nextp = 0      teoretic asa este corect dar nu da rezultatul pe exemplul mare
-    # elif nextp== 0: nextp =6
+    if  nextp== 0: nextp =lung-1
+
     intrari.insert(nextp, aa)
 
 
@@ -36,8 +36,6 @@ for line in fil:
 
 # ------------------------------- input ----------------------------------------------
 lung = len(intrari)
-
-key = 811589153
 
 pattern = intrari.copy()
 
