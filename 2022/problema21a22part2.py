@@ -26,6 +26,9 @@ for line in fil:
         monkey[a] = (u1, u3, u2)
 
 # ------------------------------- input ----------------------------------------------
+
+(u1, u2, op) = monkey['root']
+monkey['root'] = (u1, u2, '-')
 mai = True
 copie1 = monkey.copy()
 copie2 = monkeyready.copy()
@@ -35,8 +38,7 @@ while mai:
     monkey = copie1.copy()
     monkeyready = copie2.copy()
     monkeyready['humn'] = start
-    (u1, u2, op) = monkey['root']
-    monkey['root'] = (u1, u2, '-')
+
     while 'root' not in monkeyready:
         removelist = []
         for key, (u1, u2, operator) in monkey.items():
