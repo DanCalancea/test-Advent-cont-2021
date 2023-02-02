@@ -100,11 +100,7 @@ def marginicub(y, x, unde):
                     cubvecin['x'] + 1) - xincub
     if harta[my + 1][mx + 1] == LIBER:
         und = rewind(catre)
-    if (my + 1, mx + 1) == (150, 1) and (y, x) == (3, 100):
-        print(my, mx, y, x, mycub['name'], cubvecin['name'], cubvecin['y'], catre, und, rotate, intors)
-        input()
 
-    #
     return my + 1, mx + 1, und
 
 
